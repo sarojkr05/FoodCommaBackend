@@ -8,8 +8,9 @@ async function logout(req, res) {
 
     res.cookie("authToken", "", {
         httpOnly: true,
-        secure: false,
-        maxAge: 7 * 24 * 60 * 60 * 1000
+        secure: true,
+        sameSite: "none",
+        maxAge: 0
     });
     return res.status(200).json({
         success: true,
@@ -28,7 +29,7 @@ async function login(req, res) {
         res.cookie("authToken", response.token, {
             httpOnly: true,
             secure: true,
-            samSite: "none", // need for cross origin cookies
+            sameSite: "none", // need for cross origin cookies
             maxAge: 7 * 24 * 60 * 60 * 1000
         })
 
