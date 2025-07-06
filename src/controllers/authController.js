@@ -1,3 +1,4 @@
+const { none } = require("../middlewares/multerMiddleware");
 const { loginUser } = require("../services/authService");
 
 
@@ -26,7 +27,8 @@ async function login(req, res) {
 
         res.cookie("authToken", response.token, {
             httpOnly: true,
-            secure: false,
+            secure: true,
+            samSite: "none", // need for cross origin cookies
             maxAge: 7 * 24 * 60 * 60 * 1000
         })
 
